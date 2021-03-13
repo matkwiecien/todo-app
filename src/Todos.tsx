@@ -10,6 +10,13 @@ const Todos = () => {
         setTask('')
     }
 
+    const deleteTask = (index: number) => {
+        setTasks(tasks => {
+            const tasksCopy = [...tasks];
+            tasksCopy.splice(index, 1);
+            return tasksCopy
+        })
+    }
     return (
         <>
             <form onSubmit={(event) => {
@@ -24,7 +31,16 @@ const Todos = () => {
             </form>
             <ul>
                 {
-                    tasks.map((task, index) => <li key={index}>{task}</li>)
+                    tasks.map((task, index) => (
+                        <li key={index}>
+                            {task}
+                            <button onClick={() => {
+                                deleteTask(index)
+                            }}>
+                                Delete
+                            </button>
+                        </li>
+                    ))
                 }
             </ul>
         </>
